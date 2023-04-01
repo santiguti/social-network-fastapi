@@ -15,7 +15,6 @@ def get_posts(
     skip: int = 0,
     search: Optional[str] = "",
 ):
-
     posts = (
         db.query(models.Post)
         .filter(models.Post.title.contains(search))
@@ -32,7 +31,6 @@ def create_posts(
     db: Session = Depends(get_db),
     current_user: int = Depends(oauth2.get_current_user),
 ):
-
     new_post = models.Post(owner_id=current_user.id, **post.dict())
     db.add(new_post)
     db.commit()
